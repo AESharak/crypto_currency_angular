@@ -1,0 +1,60 @@
+import { Component, EventEmitter, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-search',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  template: `
+    <div class="relative mb-6">
+      <div
+        class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+      >
+        <svg
+          class="w-5 h-5 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          ></path>
+        </svg>
+      </div>
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="handleSearch()"
+        class="w-full pl-10 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+        placeholder="Search for a cryptocurrency..."
+        aria-label="Search cryptocurrencies"
+        tabindex="0"
+      />
+      <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+        <span class="text-sm text-gray-400 bg-slate-700 px-2 py-1 rounded">
+          ⌘K
+        </span>
+      </div>
+    </div>
+  `,
+  styles: [
+    `
+      input:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+    `,
+  ],
+})
+export class SearchComponent {
+  @Output() searchChanged = new EventEmitter<string>();
+
+  searchTerm = '';
+
+  handleSearch(): void {
+    this.searchChanged.emit(this.searchTerm);
+  }
+}

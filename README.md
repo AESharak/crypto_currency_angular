@@ -1,59 +1,147 @@
-# CryptoDashboard
+# Cryptocurrency Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.1.
+A modern, responsive cryptocurrency dashboard built with Angular and Tailwind CSS that displays real-time cryptocurrency data using the CoinGecko API.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- 📊 **Real-time Data**: Live cryptocurrency prices with automatic updates every 30 seconds
+- 🔍 **Search Functionality**: Filter cryptocurrencies by name or symbol
+- 📈 **Mini Charts**: Sparkline charts showing 7-day price trends
+- 📱 **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- 🎨 **Modern UI**: Beautiful dark theme with smooth animations and transitions
+- ⚡ **Fast Performance**: Optimized with Angular best practices and OnPush change detection
+- ♿ **Accessibility**: Full ARIA support and keyboard navigation
+
+## Architecture
+
+The application follows Angular best practices with a modular architecture:
+
+### Components
+
+- `AppComponent` - Main application shell
+- `CryptoListComponent` - Main dashboard displaying cryptocurrency data
+- `SearchComponent` - Search functionality with real-time filtering
+- `ChartComponent` - Reusable chart component for sparkline visualizations
+
+### Services
+
+- `CryptocurrencyService` - Handles API calls to CoinGecko and real-time data updates
+
+### Models
+
+- `Cryptocurrency` - TypeScript interfaces for type safety
+
+### Key Features
+
+- **Real-time Updates**: Uses RxJS observables for live data streaming
+- **Responsive Grid**: CSS Grid layout that adapts to different screen sizes
+- **Error Handling**: Graceful error handling with user-friendly messages
+- **Loading States**: Visual feedback during data fetching
+- **Type Safety**: Full TypeScript implementation
+
+## Technologies Used
+
+- **Angular 19** - Frontend framework
+- **Tailwind CSS** - Utility-first CSS framework
+- **Chart.js** - Canvas-based charting library
+- **RxJS** - Reactive programming for data streams
+- **TypeScript** - Type-safe JavaScript
+- **CoinGecko API** - Real-time cryptocurrency data
+
+## Prerequisites
+
+- Node.js (version 18 or higher)
+- npm or yarn package manager
+- Angular CLI
+
+## Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd crypto-dashboard
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+
+   ```bash
+   ng serve
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:4200`
+
+## Available Scripts
+
+- `ng serve` - Start development server
+- `ng build` - Build the project for production
+- `ng test` - Run unit tests
+- `ng lint` - Run linting
+- `ng e2e` - Run end-to-end tests
+
+## API Usage
+
+This application uses the [CoinGecko API](https://www.coingecko.com/en/api) which provides:
+
+- Free tier with rate limiting
+- No API key required for basic usage
+- Real-time cryptocurrency market data
+- Historical price data and charts
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## Performance Optimizations
+
+- Lazy loading of images
+- OnPush change detection strategy
+- Efficient data filtering with RxJS operators
+- Canvas-based charts for better performance
+- Minimal bundle size with standalone components
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
+
+## Deployment
+
+### Build for production
 
 ```bash
-ng serve
+ng build --configuration production
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Deploy to GitHub Pages
 
 ```bash
-ng generate component component-name
+ng deploy --base-href=/crypto-dashboard/
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Future Enhancements
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [ ] Portfolio tracking
+- [ ] Price alerts
+- [ ] Advanced charting with multiple timeframes
+- [ ] Favorites/watchlist functionality
+- [ ] Dark/light theme toggle
+- [ ] PWA support for offline usage
+- [ ] WebSocket integration for real-time updates
