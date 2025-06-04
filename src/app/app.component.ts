@@ -5,8 +5,7 @@ import { CryptoListComponent } from './components/crypto-list/crypto-list.compon
   selector: 'app-root',
   standalone: true,
   imports: [CryptoListComponent],
-  template: ` <app-crypto-list></app-crypto-list> `,
-  styleUrls: ['./app.component.css'],
+  templateUrl: './app.component.html',
 })
 export class AppComponent {
   title = 'crypto-dashboard';

@@ -17,11 +17,7 @@ Chart.register(...registerables);
   selector: 'app-chart',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="w-full h-full">
-      <canvas #chartCanvas class="w-full h-full"></canvas>
-    </div>
-  `,
+  templateUrl: './chart.component.html',
 })
 export class ChartComponent
   implements OnInit, AfterViewInit, OnDestroy, OnChanges
