@@ -9,22 +9,23 @@
   <app-search (searchChanged)="handleSearchChanged($event)"></app-search>
 
   <!-- Loading State -->
-  <div *ngIf="isLoading" class="flex justify-center items-center py-12">
+  @if (isLoading) {
+  <div class="flex justify-center items-center py-12">
     <div class="spinner"></div>
     <span class="ml-3 text-gray-400">Loading cryptocurrency data...</span>
   </div>
+  }
 
   <!-- Error State -->
-  <div
-    *ngIf="error"
-    class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-6"
-  >
+  @if (error) {
+  <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-6">
     <p class="text-red-400">{{ error }}</p>
   </div>
+  }
 
   <!-- Crypto Table -->
+  @if (!isLoading && !error) {
   <div
-    *ngIf="!isLoading && !error"
     class="bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700"
   >
     <!-- Table Header -->
@@ -53,8 +54,8 @@
 
     <!-- Table Body -->
     <div class="divide-y divide-slate-700">
+      @for (crypto of filteredCryptos; track crypto.id) {
       <div
-        *ngFor="let crypto of filteredCryptos; trackBy: trackByCryptoId"
         class="grid grid-cols-1 md:grid-cols-6 gap-4 p-4 hover:bg-slate-700/30 transition-colors duration-200"
       >
         <!-- Rank (Mobile: inline, Desktop: separate column) -->
@@ -100,27 +101,17 @@
         <!-- Mini Chart -->
         <div class="flex items-center justify-center">
           <div class="w-20 h-12">
+            @if (crypto.sparkline_in_7d && crypto.sparkline_in_7d.price &&
+            crypto.sparkline_in_7d.price.length > 0) {
             <app-chart
-              *ngIf="
-                crypto.sparkline_in_7d &&
-                crypto.sparkline_in_7d.price &&
-                crypto.sparkline_in_7d.price.length > 0
-              "
               [data]="crypto.sparkline_in_7d.price"
               [color]="
                 crypto.price_change_percentage_24h >= 0 ? '#10b981' : '#ef4444'
               "
             ></app-chart>
-            <div
-              *ngIf="
-                !crypto.sparkline_in_7d ||
-                !crypto.sparkline_in_7d.price ||
-                crypto.sparkline_in_7d.price.length === 0
-              "
-              class="text-gray-500 text-xs text-center"
-            >
-              No data
-            </div>
+            } @else {
+            <div class="text-gray-500 text-xs text-center">No data</div>
+            }
           </div>
         </div>
 
@@ -156,22 +147,25 @@
           </button>
         </div>
       </div>
+      }
     </div>
 
     <!-- Empty State -->
-    <div *ngIf="filteredCryptos.length === 0" class="text-center py-12">
+    @if (filteredCryptos.length === 0) {
+    <div class="text-center py-12">
       <div class="text-gray-400 mb-2">No cryptocurrencies found</div>
       <div class="text-gray-500 text-sm">
         Try adjusting your search criteria
       </div>
     </div>
+    }
   </div>
+  }
 
   <!-- Last Updated -->
-  <div
-    *ngIf="!isLoading && lastUpdated"
-    class="text-center mt-6 text-gray-500 text-sm"
-  >
+  @if (!isLoading && lastUpdated) {
+  <div class="text-center mt-6 text-gray-500 text-sm">
     Last updated: {{ formatLastUpdated(lastUpdated) }}
   </div>
+  }
 </div>
