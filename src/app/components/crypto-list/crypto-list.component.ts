@@ -6,11 +6,19 @@ import { CryptocurrencyService } from '../../services/cryptocurrency.service';
 import { Cryptocurrency } from '../../models/cryptocurrency.model';
 import { SearchComponent } from '../search/search.component';
 import { ChartComponent } from '../chart/chart.component';
+import { HeaderComponent } from '../header/header.component';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-crypto-list',
   standalone: true,
-  imports: [CommonModule, SearchComponent, ChartComponent],
+  imports: [
+    CommonModule,
+    SearchComponent,
+    ChartComponent,
+    HeaderComponent,
+    LoadingComponent,
+  ],
   templateUrl: './crypto-list.component.html',
 })
 export class CryptoListComponent implements OnInit, OnDestroy {
