@@ -9,6 +9,8 @@ import { ChartComponent } from '../chart/chart.component';
 import { HeaderComponent } from '../header/header.component';
 import { LoadingComponent } from '../loading/loading.component';
 import { ErrorComponent } from '../error/error.component';
+import { EmptyDataComponent } from '../empty-data/empty-data.component';
+import { CryptoTableComponent } from '../crypto-table/crypto-table.component';
 
 @Component({
   selector: 'app-crypto-list',
@@ -20,6 +22,7 @@ import { ErrorComponent } from '../error/error.component';
     HeaderComponent,
     LoadingComponent,
     ErrorComponent,
+    EmptyDataComponent,
   ],
   templateUrl: './crypto-list.component.html',
 })
