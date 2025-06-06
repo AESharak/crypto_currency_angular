@@ -5,13 +5,8 @@
 
   @if (isLoading) {
   <app-loading></app-loading>
-  }
-
-  <!-- Error State -->
-  @if (error) {
-  <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-6">
-    <p class="text-red-400">{{ error }}</p>
-  </div>
+  } @if (error) {
+  <app-error [error]="error"></app-error>
   }
 
   <!-- Crypto Table -->
@@ -142,7 +137,7 @@
     </div>
 
     <!-- Empty State -->
-    @if (filteredCryptos.length === 0) {
+    @if (filteredCryptos.length === 0 && !isLoading && !error) {
     <div class="text-center py-12">
       <div class="text-gray-400 mb-2">No cryptocurrencies found</div>
       <div class="text-gray-500 text-sm">

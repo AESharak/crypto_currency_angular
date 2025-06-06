@@ -8,6 +8,7 @@ import { SearchComponent } from '../search/search.component';
 import { ChartComponent } from '../chart/chart.component';
 import { HeaderComponent } from '../header/header.component';
 import { LoadingComponent } from '../loading/loading.component';
+import { ErrorComponent } from '../error/error.component';
 
 @Component({
   selector: 'app-crypto-list',
@@ -18,6 +19,7 @@ import { LoadingComponent } from '../loading/loading.component';
     ChartComponent,
     HeaderComponent,
     LoadingComponent,
+    ErrorComponent,
   ],
   templateUrl: './crypto-list.component.html',
 })
@@ -35,10 +37,28 @@ export class CryptoListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.setupDataSubscription();
+    this.setupLoadingSubscription();
+    this.setupErrorSubscription();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  private setupLoadingSubscription(): void {
+    this.subscription.add(
+      this.cryptoService.loading$.subscribe((isLoading) => {
+        this.isLoading = isLoading;
+      })
+    );
+  }
+
+  private setupErrorSubscription(): void {
+    this.subscription.add(
+      this.cryptoService.error$.subscribe((error) => {
+        this.error = error;
+      })
+    );
   }
 
   private setupDataSubscription(): void {
@@ -62,15 +82,10 @@ export class CryptoListComponent implements OnInit, OnDestroy {
       combinedStream.subscribe({
         next: (filteredCryptos) => {
           this.filteredCryptos = filteredCryptos;
-          this.isLoading = false;
           this.lastUpdated = new Date();
-          this.error = null;
         },
         error: (error) => {
-          this.error =
-            'Failed to load cryptocurrency data. Please try again later.';
-          this.isLoading = false;
-          console.error('Error loading crypto data:', error);
+          console.error('Error in data subscription:', error);
         },
       })
     );
