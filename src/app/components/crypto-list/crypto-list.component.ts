@@ -5,11 +5,9 @@ import { map } from 'rxjs/operators';
 import { CryptocurrencyService } from '../../services/cryptocurrency.service';
 import { Cryptocurrency } from '../../models/cryptocurrency.model';
 import { SearchComponent } from '../search/search.component';
-import { ChartComponent } from '../chart/chart.component';
 import { HeaderComponent } from '../header/header.component';
 import { LoadingComponent } from '../loading/loading.component';
 import { ErrorComponent } from '../error/error.component';
-import { EmptyDataComponent } from '../empty-data/empty-data.component';
 import { CryptoTableComponent } from '../crypto-table/crypto-table.component';
 
 @Component({
@@ -18,11 +16,10 @@ import { CryptoTableComponent } from '../crypto-table/crypto-table.component';
   imports: [
     CommonModule,
     SearchComponent,
-    ChartComponent,
     HeaderComponent,
     LoadingComponent,
     ErrorComponent,
-    EmptyDataComponent,
+    CryptoTableComponent,
   ],
   templateUrl: './crypto-list.component.html',
 })
@@ -96,37 +93,6 @@ export class CryptoListComponent implements OnInit, OnDestroy {
 
   handleSearchChanged(searchTerm: string): void {
     this.searchTermSubject.next(searchTerm);
-  }
-
-  formatPrice(price: number): string {
-    if (price >= 1) {
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }).format(price);
-    } else {
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 4,
-        maximumFractionDigits: 6,
-      }).format(price);
-    }
-  }
-
-  formatPercentage(percentage: number): string {
-    const sign = percentage >= 0 ? '+' : '';
-    return `${sign}${percentage.toFixed(2)}%`;
-  }
-
-  getChangeClass(percentage: number): string {
-    if (percentage >= 0) {
-      return 'text-green-400 bg-green-500/10';
-    } else {
-      return 'text-red-400 bg-red-500/10';
-    }
   }
 
   formatLastUpdated(date: Date): string {

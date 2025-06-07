@@ -1,0 +1,94 @@
+<div
+  class="bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700"
+>
+  <!-- Table Header -->
+  <div
+    class="hidden md:grid md:grid-cols-5 gap-4 p-4 bg-slate-700/50 text-gray-300 text-sm font-medium"
+  >
+    <div class="flex items-center">
+      <span>#</span>
+    </div>
+    <div class="flex items-center">
+      <span>Name</span>
+    </div>
+    <div class="flex items-center justify-end">
+      <span>Price</span>
+    </div>
+    <div class="flex items-center justify-end">
+      <span>24h Change</span>
+    </div>
+    <div class="flex items-center justify-center">
+      <span>Chart</span>
+    </div>
+  </div>
+
+  <!-- Table Body -->
+  <div class="divide-y divide-slate-700">
+    @for (crypto of filteredCryptos; track crypto.id) {
+    <div
+      class="grid grid-cols-1 md:grid-cols-5 gap-4 p-4 hover:bg-slate-700/30 transition-colors duration-200"
+    >
+      <!-- Rank (Mobile: inline, Desktop: separate column) -->
+      <div class="flex items-center md:justify-start">
+        <span class="text-gray-400 text-sm font-mono w-8">{{
+          crypto.market_cap_rank
+        }}</span>
+      </div>
+
+      <!-- Name and Logo -->
+      <div class="flex items-center space-x-3">
+        <img
+          [src]="crypto.image"
+          [alt]="crypto.name + ' logo'"
+          class="w-8 h-8 rounded-full"
+          loading="lazy"
+        />
+        <div>
+          <div class="text-white font-medium">{{ crypto.name }}</div>
+          <div class="text-gray-400 text-sm uppercase">
+            {{ crypto.symbol }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Price -->
+      <div class="flex items-center justify-end">
+        <span class="text-white font-mono text-lg">
+          {{ formatPrice(crypto.current_price) }}
+        </span>
+      </div>
+
+      <!-- 24h Change -->
+      <div class="flex items-center justify-end">
+        <span
+          [class]="getChangeClass(crypto.price_change_percentage_24h)"
+          class="font-mono text-sm px-2 py-1 rounded"
+        >
+          {{ formatPercentage(crypto.price_change_percentage_24h) }}
+        </span>
+      </div>
+
+      <!-- Mini Chart -->
+      <div class="flex items-center justify-center">
+        <div class="w-20 h-12">
+          @if (crypto.sparkline_in_7d && crypto.sparkline_in_7d.price &&
+          crypto.sparkline_in_7d.price.length > 0) {
+          <app-chart
+            [data]="crypto.sparkline_in_7d.price"
+            [color]="
+              crypto.price_change_percentage_24h >= 0 ? '#10b981' : '#ef4444'
+            "
+          ></app-chart>
+          } @else {
+          <div class="text-gray-500 text-xs text-center">No data</div>
+          }
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  @if (filteredCryptos.length === 0 && !isLoading && !error) {
+  <app-empty-data></app-empty-data>
+  }
+</div>
