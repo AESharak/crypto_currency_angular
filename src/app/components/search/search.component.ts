@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -11,10 +18,26 @@ import { FormsModule } from '@angular/forms';
 })
 export class SearchComponent {
   @Output() searchChanged = new EventEmitter<string>();
+  @ViewChild('searchInput', { static: false })
+  searchInput!: ElementRef<HTMLInputElement>;
 
   searchTerm = '';
 
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardShortcut(event: KeyboardEvent): void {
+    if (event.ctrlKey && event.key === 'k') {
+      event.preventDefault();
+      this.focusSearchInput();
+    }
+  }
+
   handleSearch(): void {
     this.searchChanged.emit(this.searchTerm);
+  }
+
+  private focusSearchInput(): void {
+    if (this.searchInput) {
+      this.searchInput.nativeElement.focus();
+    }
   }
 }
