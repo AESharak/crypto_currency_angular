@@ -9,6 +9,7 @@ import { HeaderComponent } from '../header/header.component';
 import { LoadingComponent } from '../loading/loading.component';
 import { ErrorComponent } from '../error/error.component';
 import { CryptoTableComponent } from '../crypto-table/crypto-table.component';
+import { LastUpdatedComponent } from '../last-updated/last-updated.component';
 
 @Component({
   selector: 'app-crypto-list',
@@ -20,6 +21,7 @@ import { CryptoTableComponent } from '../crypto-table/crypto-table.component';
     LoadingComponent,
     ErrorComponent,
     CryptoTableComponent,
+    LastUpdatedComponent,
   ],
   templateUrl: './crypto-list.component.html',
 })
@@ -93,13 +95,5 @@ export class CryptoListComponent implements OnInit, OnDestroy {
 
   handleSearchChanged(searchTerm: string): void {
     this.searchTermSubject.next(searchTerm);
-  }
-
-  formatLastUpdated(date: Date): string {
-    return new Intl.DateTimeFormat('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    }).format(date);
   }
 }

@@ -44,4 +44,12 @@ export class FormattingService {
   getTrendColor(percentage: number): string {
     return percentage >= 0 ? '#10b981' : '#ef4444';
   }
+
+  formatLastUpdated(date: Date): string {
+    return new Intl.DateTimeFormat('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    }).format(date);
+  }
 }

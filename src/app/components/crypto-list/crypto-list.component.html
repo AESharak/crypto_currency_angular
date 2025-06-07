@@ -21,8 +21,6 @@
 
   <!-- Last Updated -->
   @if (!isLoading && lastUpdated) {
-  <div class="text-center mt-6 text-gray-500 text-sm">
-    Last updated: {{ formatLastUpdated(lastUpdated) }}
-  </div>
+  <app-last-updated [lastUpdated]="lastUpdated"></app-last-updated>
   }
 </div>
