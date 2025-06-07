@@ -1,7 +1,6 @@
 import {
   Component,
   Input,
-  OnInit,
   OnDestroy,
   ElementRef,
   ViewChild,
@@ -10,6 +9,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
+import { ChartService } from '../../services/chart.service';
 
 Chart.register(...registerables);
 
@@ -19,9 +19,7 @@ Chart.register(...registerables);
   imports: [CommonModule],
   templateUrl: './chart.component.html',
 })
-export class ChartComponent
-  implements OnInit, AfterViewInit, OnDestroy, OnChanges
-{
+export class ChartComponent implements AfterViewInit, OnDestroy, OnChanges {
   @Input() data: number[] = [];
   @Input() color: string = '#3b82f6';
   @Input() height: number = 60;
@@ -30,17 +28,19 @@ export class ChartComponent
 
   private chart: Chart | null = null;
 
-  ngOnInit(): void {
-    // Component initialized
-  }
+  constructor(private chartService: ChartService) {}
 
   ngAfterViewInit(): void {
     this.createChart();
   }
 
   ngOnDestroy(): void {
-    if (this.chart) {
-      this.chart.destroy();
+    this.chartService.destroyChart(this.chart);
+  }
+
+  ngOnChanges(): void {
+    if (this.chart && this.data?.length > 0) {
+      this.createChart();
     }
   }
 
@@ -52,67 +52,11 @@ export class ChartComponent
     const ctx = this.chartCanvas.nativeElement.getContext('2d');
     if (!ctx) return;
 
-    // Determine color based on trend
-    const isPositive = this.data[this.data.length - 1] > this.data[0];
-    const lineColor = isPositive ? '#10b981' : '#ef4444';
-
-    const config: ChartConfiguration = {
-      type: 'line',
-      data: {
-        labels: this.data.map((_, index) => index.toString()),
-        datasets: [
-          {
-            data: this.data,
-            borderColor: lineColor,
-            backgroundColor: `${lineColor}20`,
-            fill: true,
-            tension: 0.4,
-            pointRadius: 0,
-            pointHoverRadius: 0,
-            borderWidth: 2,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          },
-          tooltip: {
-            enabled: false,
-          },
-        },
-        scales: {
-          x: {
-            display: false,
-          },
-          y: {
-            display: false,
-          },
-        },
-        elements: {
-          point: {
-            radius: 0,
-          },
-        },
-        interaction: {
-          intersect: false,
-        },
-      },
-    };
-
-    if (this.chart) {
-      this.chart.destroy();
-    }
-
-    this.chart = new Chart(ctx, config);
-  }
-
-  ngOnChanges(): void {
-    if (this.chart && this.data && this.data.length > 0) {
-      this.createChart();
-    }
+    this.chartService.destroyChart(this.chart);
+    this.chart = this.chartService.createSparklineChart(
+      ctx,
+      this.data,
+      this.color
+    );
   }
 }
