@@ -98,20 +98,6 @@ export class CryptoListComponent implements OnInit, OnDestroy {
     this.searchTermSubject.next(searchTerm);
   }
 
-  handleViewDetails(crypto: Cryptocurrency): void {
-    console.log('View details for:', crypto.name);
-    // Implement detail view navigation
-  }
-
-  handleToggleFavorite(crypto: Cryptocurrency): void {
-    console.log('Toggle favorite for:', crypto.name);
-    // Implement favorite functionality
-  }
-
-  trackByCryptoId(index: number, crypto: Cryptocurrency): string {
-    return crypto.id;
-  }
-
   formatPrice(price: number): string {
     if (price >= 1) {
       return new Intl.NumberFormat('en-US', {
