@@ -54,17 +54,19 @@
       <!-- Price -->
       <div class="flex items-center justify-end">
         <span class="text-white font-mono text-lg">
-          {{ formatPrice(crypto.current_price) }}
+          {{ formatting.formatPrice(crypto.current_price) }}
         </span>
       </div>
 
       <!-- 24h Change -->
       <div class="flex items-center justify-end">
         <span
-          [class]="getChangeClass(crypto.price_change_percentage_24h)"
+          [class]="
+            formatting.getChangeClass(crypto.price_change_percentage_24h)
+          "
           class="font-mono text-sm px-2 py-1 rounded"
         >
-          {{ formatPercentage(crypto.price_change_percentage_24h) }}
+          {{ formatting.formatPercentage(crypto.price_change_percentage_24h) }}
         </span>
       </div>
 
