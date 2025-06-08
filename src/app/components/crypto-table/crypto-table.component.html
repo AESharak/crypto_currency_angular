@@ -29,14 +29,14 @@
       class="grid grid-cols-1 md:grid-cols-5 gap-4 p-4 hover:bg-slate-700/30 transition-colors duration-200"
     >
       <!-- Rank (Mobile: inline, Desktop: separate column) -->
-      <div class="flex items-center md:justify-start">
+      <div class="flex items-center justify-center md:justify-start">
         <span class="text-gray-400 text-sm font-mono w-8">{{
           crypto.market_cap_rank
         }}</span>
       </div>
 
       <!-- Name and Logo -->
-      <div class="flex items-center space-x-3">
+      <div class="flex items-center justify-center md:justify-start space-x-3">
         <img
           [src]="crypto.image"
           [alt]="crypto.name + ' logo'"
@@ -52,14 +52,14 @@
       </div>
 
       <!-- Price -->
-      <div class="flex items-center justify-end">
+      <div class="flex items-center justify-center md:justify-end">
         <span class="text-white font-mono text-lg">
           {{ formatting.formatPrice(crypto.current_price) }}
         </span>
       </div>
 
       <!-- 24h Change -->
-      <div class="flex items-center justify-end">
+      <div class="flex items-center justify-center md:justify-end">
         <span
           [class]="
             formatting.getChangeClass(crypto.price_change_percentage_24h)
@@ -72,7 +72,7 @@
 
       <!-- Mini Chart -->
       <div class="flex items-center justify-center">
-        <div class="w-20 h-12">
+        <div class="w-44 h-24 md:w-20 md:h-12">
           @if (crypto.sparkline_in_7d && crypto.sparkline_in_7d.price &&
           crypto.sparkline_in_7d.price.length > 0) {
           <app-chart
