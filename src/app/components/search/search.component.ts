@@ -14,7 +14,13 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.css',
+  styles: [
+    `
+      input:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+    `,
+  ],
 })
 export class SearchComponent {
   @Output() searchChanged = new EventEmitter<string>();
