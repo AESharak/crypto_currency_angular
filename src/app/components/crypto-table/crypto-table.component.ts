@@ -14,4 +14,12 @@ export class CryptoTableComponent {
   @Input() error: string | null = null;
 
   constructor(public formatting: FormattingService) {}
+
+  headerElements = [
+    { text: '#', additionalClasses: '' },
+    { text: 'Name', additionalClasses: '' },
+    { text: 'Price', additionalClasses: 'justify-center' },
+    { text: '24h Change', additionalClasses: 'justify-end' },
+    { text: 'Chart', additionalClasses: 'justify-center' },
+  ];
 }
