@@ -91,6 +91,11 @@
   </div>
 
   @if (filteredCryptos.length === 0 && !isLoading && !error) {
-  <app-empty-data></app-empty-data>
+  <div
+    class="flex flex-col items-center justify-center p-8 text-center text-gray-500"
+  >
+    <p class="text-lg">No data available</p>
+    <p class="text-sm">There are no cryptocurrencies to display.</p>
+  </div>
   }
 </div>
