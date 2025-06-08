@@ -1,4 +1,51 @@
-<div class="flex justify-center items-center py-12">
-  <div class="spinner"></div>
-  <span class="ml-3 text-gray-400">Loading cryptocurrency data...</span>
+<div
+  class="bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700"
+>
+  <!-- Table Header -->
+  <div
+    class="hidden md:grid md:grid-cols-5 gap-4 p-4 bg-slate-700/50 text-gray-300 text-sm font-medium"
+  >
+    <div class="flex items-center">
+      <span>#</span>
+    </div>
+    <div class="flex items-center">
+      <span>Name</span>
+    </div>
+    <div class="flex items-center justify-end">
+      <span>Price</span>
+    </div>
+    <div class="flex items-center justify-end">
+      <span>24h Change</span>
+    </div>
+    <div class="flex items-center justify-center">
+      <span>Chart</span>
+    </div>
+  </div>
+
+  <!-- Skeleton Body -->
+  <div class="divide-y divide-slate-700">
+    @for (item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track item) {
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 p-4 animate-pulse">
+      <div class="flex items-center justify-center md:justify-start">
+        <div class="bg-slate-700 h-5 rounded w-8"></div>
+      </div>
+      <div class="flex items-center justify-center md:justify-start space-x-3">
+        <div class="w-8 h-8 rounded-full bg-slate-700 shrink-0"></div>
+        <div class="w-full space-y-2">
+          <div class="h-4 bg-slate-700 rounded w-3/4"></div>
+          <div class="h-3 bg-slate-700 rounded w-1/2"></div>
+        </div>
+      </div>
+      <div class="flex items-center justify-center md:justify-end">
+        <div class="h-6 bg-slate-700 rounded w-28"></div>
+      </div>
+      <div class="flex items-center justify-center md:justify-end">
+        <div class="h-6 bg-slate-700 rounded w-20"></div>
+      </div>
+      <div class="flex items-center justify-center">
+        <div class="w-44 h-24 md:w-20 md:h-12 bg-slate-700 rounded"></div>
+      </div>
+    </div>
+    }
+  </div>
 </div>
