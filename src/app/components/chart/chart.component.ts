@@ -7,8 +7,7 @@ import {
   AfterViewInit,
   OnChanges,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Chart, ChartConfiguration, registerables } from 'chart.js';
+import { Chart, registerables } from 'chart.js';
 import { ChartService } from '../../services/chart.service';
 
 Chart.register(...registerables);
@@ -16,7 +15,7 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-chart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './chart.component.html',
 })
 export class ChartComponent implements AfterViewInit, OnDestroy, OnChanges {

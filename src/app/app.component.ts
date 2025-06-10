@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Subscription, combineLatest, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { CryptocurrencyService } from './services/cryptocurrency.service';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { CryptoDataManagerService } from './services/crypto-data-manager.service';
 import { Cryptocurrency } from './models/cryptocurrency.model';
 import { SearchComponent } from './components/search/search.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -15,7 +14,6 @@ import { LastUpdatedComponent } from './components/last-updated/last-updated.com
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule,
     SearchComponent,
     HeaderComponent,
     LoadingComponent,
@@ -26,74 +24,50 @@ import { LastUpdatedComponent } from './components/last-updated/last-updated.com
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit, OnDestroy {
-  cryptos: Cryptocurrency[] = [];
   filteredCryptos: Cryptocurrency[] = [];
   isLoading = true;
   error: string | null = null;
   lastUpdated: Date | null = null;
 
-  private searchTermSubject = new BehaviorSubject<string>('');
+  private cryptoDataManager = inject(CryptoDataManagerService);
+
   private subscription = new Subscription();
 
-  constructor(private cryptoService: CryptocurrencyService) {}
-
   ngOnInit(): void {
-    this.setupDataSubscription();
-    this.setupLoadingSubscription();
-    this.setupErrorSubscription();
+    this.setupSubscriptions();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  private setupLoadingSubscription(): void {
+  private setupSubscriptions(): void {
+    // Subscribe to filtered cryptocurrencies
     this.subscription.add(
-      this.cryptoService.loading$.subscribe((isLoading) => {
+      this.cryptoDataManager.filteredCryptos$.subscribe((filteredCryptos) => {
+        this.filteredCryptos = filteredCryptos;
+      })
+    );
+
+    // Subscribe to loading state
+    this.subscription.add(
+      this.cryptoDataManager.loading$.subscribe((isLoading) => {
         this.isLoading = isLoading;
       })
     );
-  }
 
-  private setupErrorSubscription(): void {
+    // Subscribe to error state
     this.subscription.add(
-      this.cryptoService.error$.subscribe((error) => {
+      this.cryptoDataManager.error$.subscribe((error) => {
         this.error = error;
       })
     );
-  }
 
-  private setupDataSubscription(): void {
-    const combinedStream = combineLatest([
-      this.cryptoService.cryptoData$,
-      this.searchTermSubject.asObservable(),
-    ]).pipe(
-      map(([cryptos, searchTerm]) => {
-        if (searchTerm.trim() === '') {
-          return cryptos;
-        }
-        return cryptos.filter(
-          (crypto) =>
-            crypto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            crypto.symbol.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-      })
-    );
-
+    // Subscribe to last updated timestamp
     this.subscription.add(
-      combinedStream.subscribe({
-        next: (filteredCryptos) => {
-          this.filteredCryptos = filteredCryptos;
-          this.lastUpdated = new Date();
-        },
-        error: (error) => {
-          console.error('Error in data subscription:', error);
-        },
+      this.cryptoDataManager.lastUpdated$.subscribe((lastUpdated) => {
+        this.lastUpdated = lastUpdated;
       })
     );
-  }
-
-  handleSearchChanged(searchTerm: string): void {
-    this.searchTermSubject.next(searchTerm);
   }
 }

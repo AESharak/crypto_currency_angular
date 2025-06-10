@@ -1,18 +1,20 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
   HostListener,
-  Output,
   ViewChild,
+  OnInit,
+  OnDestroy,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { SearchService } from '../../services/search.service';
+import { CryptoDataManagerService } from '../../services/crypto-data-manager.service';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './search.component.html',
   styles: [
     `
@@ -22,12 +24,29 @@ import { FormsModule } from '@angular/forms';
     `,
   ],
 })
-export class SearchComponent {
-  @Output() searchChanged = new EventEmitter<string>();
+export class SearchComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: false })
   searchInput!: ElementRef<HTMLInputElement>;
 
   searchTerm = '';
+  private subscription = new Subscription();
+
+  constructor(
+    private searchService: SearchService,
+    private cryptoDataManager: CryptoDataManagerService
+  ) {}
+
+  ngOnInit(): void {
+    this.subscription.add(
+      this.searchService.searchTerm$.subscribe((searchTerm) => {
+        this.searchTerm = searchTerm;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardShortcut(event: KeyboardEvent): void {
@@ -38,7 +57,7 @@ export class SearchComponent {
   }
 
   handleSearch(): void {
-    this.searchChanged.emit(this.searchTerm);
+    this.cryptoDataManager.updateSearch(this.searchTerm);
   }
 
   private focusSearchInput(): void {

@@ -56,18 +56,6 @@ export class CryptocurrencyService {
     );
   }
 
-  searchCryptocurrencies(searchTerm: string): Observable<Cryptocurrency[]> {
-    return this.cryptoData$.pipe(
-      map((cryptos) =>
-        cryptos.filter(
-          (crypto) =>
-            crypto.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            crypto.symbol.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      )
-    );
-  }
-
   getCryptocurrencyChart(id: string, days: number = 7): Observable<any> {
     const url = `${this.baseUrl}/coins/${id}/market_chart?vs_currency=usd&days=${days}&interval=daily`;
 

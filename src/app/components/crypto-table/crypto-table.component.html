@@ -47,12 +47,17 @@
         class="col-span-2 row-start-2 md:row-start-1 md:col-start-5 flex items-center justify-center"
       >
         <div class="w-full h-24 md:w-20 md:h-12">
+          @if (crypto.sparkline_in_7d && crypto.sparkline_in_7d.price &&
+          crypto.sparkline_in_7d.price.length > 0) {
           <app-chart
             [data]="crypto.sparkline_in_7d.price"
             [color]="
               crypto.price_change_percentage_24h >= 0 ? '#10b981' : '#ef4444'
             "
           ></app-chart>
+          } @else {
+          <div class="text-gray-500 text-xs text-center">No data</div>
+          }
         </div>
       </div>
     </div>
