@@ -7,6 +7,7 @@ import { CryptoNameLogoComponent } from '../crypto-name-logo/crypto-name-logo.co
 
 @Component({
   selector: 'app-crypto-table',
+  standalone: true,
   imports: [ChartComponent, TableHeaderComponent, CryptoNameLogoComponent],
   templateUrl: './crypto-table.component.html',
 })

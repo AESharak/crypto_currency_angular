@@ -3,6 +3,7 @@ import { FormattingService } from '../../services/formatting.service';
 
 @Component({
   selector: 'app-last-updated',
+  standalone: true,
   template: `
     <div class="text-center mt-6 text-gray-500 text-sm">
       Last updated: {{ formatting.formatLastUpdated(lastUpdated()) }}

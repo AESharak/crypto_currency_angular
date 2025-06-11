@@ -2,6 +2,10 @@
 
 A modern, responsive cryptocurrency dashboard built with Angular and Tailwind CSS that displays real-time cryptocurrency data using the CoinGecko API.
 
+## Live Demo
+
+Explore the live application here → [crypto-currency-angular.vercel.app](https://crypto-currency-angular.vercel.app/)
+
 ## Features
 
 - 📊 **Real-time Data**: Live cryptocurrency prices with automatic updates every 30 seconds
@@ -14,30 +18,35 @@ A modern, responsive cryptocurrency dashboard built with Angular and Tailwind CS
 
 ## Architecture
 
-The application follows Angular best practices with a modular architecture:
+The application follows a modular, standalone-component architecture in Angular 19:
 
 ### Components
 
-- `AppComponent` - Main application shell
-- `CryptoListComponent` - Main dashboard displaying cryptocurrency data
-- `SearchComponent` - Search functionality with real-time filtering
-- `ChartComponent` - Reusable chart component for sparkline visualizations
+- `AppComponent` – application shell & main layout wrapper
+- `HeaderComponent` – sticky toolbar with project title
+- `SearchComponent` – fuzzy search / filter box
+- `CryptoTableComponent` – responsive table that renders the list of coins
+- `TableHeaderComponent` – reusable sortable table-header row
+- `CryptoNameLogoComponent` – coin logo + name cell
+- `ChartComponent` – sparkline price chart (7-day)
+- `LastUpdatedComponent` – timestamp badge
+- `LoadingComponent` – skeleton loaders & spinners
+- `ErrorComponent` – graceful error message display
 
 ### Services
 
-- `CryptocurrencyService` - Handles API calls to CoinGecko and real-time data updates
+- `CryptocurrencyService` – HTTP wrapper around the CoinGecko REST endpoints
+- `CryptoDataManagerService` – orchestrates fetching, caching and polling of coin data
+- `ChartService` – prepares datasets & colours for Chart.js
+- `SearchService` – manages reactive search/filter state
+- `FormattingService` – number / currency / percentage helpers
+- `TimestampService` – generates human-readable "last updated" timestamps
 
 ### Models
 
-- `Cryptocurrency` - TypeScript interfaces for type safety
+- `Cryptocurrency` – strongly-typed interface representing a single coin returned from CoinGecko
 
-### Key Features
-
-- **Real-time Updates**: Uses RxJS observables for live data streaming
-- **Responsive Grid**: CSS Grid layout that adapts to different screen sizes
-- **Error Handling**: Graceful error handling with user-friendly messages
-- **Loading States**: Visual feedback during data fetching
-- **Type Safety**: Full TypeScript implementation
+This layout keeps UI concerns separated from data concerns, maximises reusability, and makes unit testing straightforward.
 
 ## Technologies Used
 
@@ -59,8 +68,8 @@ The application follows Angular best practices with a modular architecture:
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
-   cd crypto-dashboard
+   git clone https://github.com/AESharak/crypto_currency_angular.git
+   cd crypto_currency_angular
    ```
 
 2. **Install dependencies**
@@ -118,10 +127,6 @@ This application uses the [CoinGecko API](https://www.coingecko.com/en/api) whic
 4. Add tests if applicable
 5. Submit a pull request
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Deployment
 
 ### Build for production
@@ -130,18 +135,13 @@ This project is licensed under the MIT License.
 ng build --configuration production
 ```
 
-### Deploy to GitHub Pages
+### Deploy to Vercel
+
+This project is ready for zero-config deployment on [Vercel](https://vercel.com/). If you have the Vercel CLI installed:
 
 ```bash
-ng deploy --base-href=/crypto-dashboard/
+ng build --configuration production   # build the project
+vercel --prod                         # deploy the "dist" folder
 ```
 
-## Future Enhancements
-
-- [ ] Portfolio tracking
-- [ ] Price alerts
-- [ ] Advanced charting with multiple timeframes
-- [ ] Favorites/watchlist functionality
-- [ ] Dark/light theme toggle
-- [ ] PWA support for offline usage
-- [ ] WebSocket integration for real-time updates
+Alternatively, push to the **master** branch on GitHub and enable the Vercel Git integration; each commit will be built and deployed automatically.

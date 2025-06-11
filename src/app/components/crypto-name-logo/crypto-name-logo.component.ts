@@ -3,6 +3,7 @@ import { Cryptocurrency } from '../../models/cryptocurrency.model';
 
 @Component({
   selector: 'app-crypto-name-logo',
+  standalone: true,
   template: ` <div
     class="row-start-1 col-start-1 flex items-center space-x-3 md:col-start-2"
   >

@@ -2,6 +2,7 @@ import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-error',
+  standalone: true,
   template: `
     <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-6">
       <p class="text-red-400">{{ error() }}</p>
