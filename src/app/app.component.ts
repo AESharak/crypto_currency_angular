@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { CryptoDataManagerService } from './services/crypto-data-manager.service';
@@ -24,10 +24,15 @@ import { LastUpdatedComponent } from './components/last-updated/last-updated.com
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit, OnDestroy {
-  filteredCryptos: Cryptocurrency[] = [];
-  isLoading = true;
-  error: string | null = null;
-  lastUpdated: Date | null = null;
+  // filteredCryptos: Cryptocurrency[] = [];
+  // isLoading = true;
+  // error: string | null = null;
+  // lastUpdated: Date | null = null;
+
+  public filteredCryptos = signal<Cryptocurrency[]>([]);
+  public isLoading = signal<boolean>(true);
+  public error = signal<string | null>(null);
+  public lastUpdated = signal<Date | null>(null);
 
   private cryptoDataManager = inject(CryptoDataManagerService);
 
@@ -45,28 +50,28 @@ export class AppComponent implements OnInit, OnDestroy {
     // Subscribe to filtered cryptocurrencies
     this.subscription.add(
       this.cryptoDataManager.filteredCryptos$.subscribe((filteredCryptos) => {
-        this.filteredCryptos = filteredCryptos;
+        this.filteredCryptos.set(filteredCryptos);
       })
     );
 
     // Subscribe to loading state
     this.subscription.add(
       this.cryptoDataManager.loading$.subscribe((isLoading) => {
-        this.isLoading = isLoading;
+        this.isLoading.set(isLoading);
       })
     );
 
     // Subscribe to error state
     this.subscription.add(
       this.cryptoDataManager.error$.subscribe((error) => {
-        this.error = error;
+        this.error.set(error);
       })
     );
 
     // Subscribe to last updated timestamp
     this.subscription.add(
       this.cryptoDataManager.lastUpdated$.subscribe((lastUpdated) => {
-        this.lastUpdated = lastUpdated;
+        this.lastUpdated.set(lastUpdated);
       })
     );
   }

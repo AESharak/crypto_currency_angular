@@ -6,12 +6,12 @@ import { FormattingService } from '../../services/formatting.service';
   standalone: true,
   template: `
     <div class="text-center mt-6 text-gray-500 text-sm">
-      Last updated: {{ formatting.formatLastUpdated(lastUpdated()) }}
+      Last updated: {{ formatting.formatLastUpdated(lastUpdated()!) }}
     </div>
   `,
 })
 export class LastUpdatedComponent {
-  public lastUpdated = input.required<Date>();
+  public lastUpdated = input.required<Date | null>();
 
   public formatting = inject(FormattingService);
 }

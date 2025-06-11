@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-table-header',
@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     <div
       class="hidden md:grid md:grid-cols-5 gap-4 p-4 bg-slate-700/50 text-gray-300 text-sm font-medium"
     >
-      @for (element of headerElements; track element) {
+      @for (element of headerElements(); track element) {
       <div class="flex items-center" [class]="element.additionalClasses">
         <span>{{ element.text }}</span>
       </div>
@@ -16,11 +16,13 @@ import { Component } from '@angular/core';
   `,
 })
 export class TableHeaderComponent {
-  headerElements = [
-    { text: '#', additionalClasses: '' },
-    { text: 'Name', additionalClasses: '' },
-    { text: 'Price', additionalClasses: 'justify-center' },
-    { text: '24h Change', additionalClasses: 'justify-end' },
-    { text: 'Chart', additionalClasses: 'justify-center' },
-  ];
+  public headerElements = signal<{ text: string; additionalClasses: string }[]>(
+    [
+      { text: '#', additionalClasses: '' },
+      { text: 'Name', additionalClasses: '' },
+      { text: 'Price', additionalClasses: 'justify-center' },
+      { text: '24h Change', additionalClasses: 'justify-end' },
+      { text: 'Chart', additionalClasses: 'justify-center' },
+    ]
+  );
 }

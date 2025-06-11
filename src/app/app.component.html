@@ -3,24 +3,24 @@
 
   <app-search></app-search>
 
-  @if (isLoading) {
+  @if (isLoading()) {
   <app-loading></app-loading>
 
-  } @if (error) {
-  <app-error [error]="error"></app-error>
+  } @if (error()) {
+  <app-error [error]="error()"></app-error>
   }
 
   <!-- Crypto Table -->
-  @if (!isLoading && !error) {
+  @if (!isLoading() && !error()) {
   <app-crypto-table
-    [filteredCryptos]="filteredCryptos"
-    [isLoading]="isLoading"
-    [error]="error"
+    [filteredCryptos]="filteredCryptos()"
+    [isLoading]="isLoading()"
+    [error]="error()"
   ></app-crypto-table>
   }
 
   <!-- Last Updated -->
-  @if (!isLoading && lastUpdated) {
-  <app-last-updated [lastUpdated]="lastUpdated"></app-last-updated>
+  @if (!isLoading() && lastUpdated()) {
+  <app-last-updated [lastUpdated]="lastUpdated()"></app-last-updated>
   }
 </div>

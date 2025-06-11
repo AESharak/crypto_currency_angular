@@ -2,10 +2,11 @@ import {
   Component,
   ElementRef,
   HostListener,
-  ViewChild,
   OnInit,
   OnDestroy,
   inject,
+  signal,
+  viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -27,20 +28,21 @@ import { CryptoDataManagerService } from '../../services/crypto-data-manager.ser
   ],
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  @ViewChild('searchInput', { static: false })
-  searchInput!: ElementRef<HTMLInputElement>;
+  // @ViewChild('searchInput', { static: false })
+  // searchInput!: ElementRef<HTMLInputElement>;
+  searchInput = viewChild.required<ElementRef<HTMLInputElement>>('searchInput');
 
   private searchService = inject(SearchService);
   private cryptoDataManager = inject(CryptoDataManagerService);
 
   private subscription = new Subscription();
 
-  public searchTerm = '';
+  public searchTerm = signal<string>('');
 
   ngOnInit(): void {
     this.subscription.add(
       this.searchService.searchTerm$.subscribe((searchTerm) => {
-        this.searchTerm = searchTerm;
+        this.searchTerm.set(searchTerm);
       })
     );
   }
@@ -58,12 +60,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   handleSearch(): void {
-    this.cryptoDataManager.updateSearch(this.searchTerm);
+    this.cryptoDataManager.updateSearch(this.searchTerm());
   }
 
   private focusSearchInput(): void {
-    if (this.searchInput) {
-      this.searchInput.nativeElement.focus();
-    }
+    this.searchInput()?.nativeElement.focus();
   }
 }
