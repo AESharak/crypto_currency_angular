@@ -1,12 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { FormattingService } from '../../services/formatting.service';
 
 @Component({
   selector: 'app-last-updated',
-  imports: [],
-  templateUrl: './last-updated.component.html',
+  template: `
+    <div class="text-center mt-6 text-gray-500 text-sm">
+      Last updated: {{ formatting.formatLastUpdated(lastUpdated()) }}
+    </div>
+  `,
 })
 export class LastUpdatedComponent {
-  @Input() lastUpdated: Date | null = null;
-  constructor(public formatting: FormattingService) {}
+  public lastUpdated = input.required<Date>();
+
+  public formatting = inject(FormattingService);
 }

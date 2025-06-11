@@ -1,10 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-error',
-  imports: [],
-  templateUrl: './error.component.html',
+  template: `
+    <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-6">
+      <p class="text-red-400">{{ error() }}</p>
+    </div>
+  `,
 })
 export class ErrorComponent {
-  @Input() error: string | null = null;
+  public error = input<string | null>(null);
 }

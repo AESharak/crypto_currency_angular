@@ -1,11 +1,12 @@
 import {
   Component,
-  Input,
   OnDestroy,
   ElementRef,
   ViewChild,
   AfterViewInit,
   OnChanges,
+  input,
+  inject,
 } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { ChartService } from '../../services/chart.service';
@@ -19,15 +20,17 @@ Chart.register(...registerables);
   templateUrl: './chart.component.html',
 })
 export class ChartComponent implements AfterViewInit, OnDestroy, OnChanges {
-  @Input() data: number[] = [];
-  @Input() color: string = '#3b82f6';
-  @Input() height: number = 60;
+  // @Input() data: number[] = [];
+  // @Input() color: string = '#3b82f6';
+
+  public data = input<number[]>([]);
+  public color = input<string>('#3b82f6');
+
   @ViewChild('chartCanvas', { static: true })
   chartCanvas!: ElementRef<HTMLCanvasElement>;
 
   private chart: Chart | null = null;
-
-  constructor(private chartService: ChartService) {}
+  private chartService = inject(ChartService);
 
   ngAfterViewInit(): void {
     this.createChart();
@@ -38,13 +41,13 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(): void {
-    if (this.chart && this.data?.length > 0) {
+    if (this.chart && this.data()?.length > 0) {
       this.createChart();
     }
   }
 
   private createChart(): void {
-    if (!this.chartCanvas?.nativeElement || this.data.length === 0) {
+    if (!this.chartCanvas?.nativeElement || this.data()?.length === 0) {
       return;
     }
 
@@ -54,8 +57,8 @@ export class ChartComponent implements AfterViewInit, OnDestroy, OnChanges {
     this.chartService.destroyChart(this.chart);
     this.chart = this.chartService.createSparklineChart(
       ctx,
-      this.data,
-      this.color
+      this.data(),
+      this.color()
     );
   }
 }

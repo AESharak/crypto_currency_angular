@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, input, Input } from '@angular/core';
 import { Cryptocurrency } from '../../models/cryptocurrency.model';
 import { ChartComponent } from '../chart/chart.component';
 import { FormattingService } from '../../services/formatting.service';
@@ -11,9 +11,9 @@ import { CryptoNameLogoComponent } from '../crypto-name-logo/crypto-name-logo.co
   templateUrl: './crypto-table.component.html',
 })
 export class CryptoTableComponent {
-  @Input() filteredCryptos: Cryptocurrency[] = [];
-  @Input() isLoading: boolean = false;
-  @Input() error: string | null = null;
+  public filteredCryptos = input<Cryptocurrency[]>([]);
+  public isLoading = input<boolean>(false);
+  public error = input<string | null>(null);
 
-  constructor(public formatting: FormattingService) {}
+  public formatting = inject(FormattingService);
 }

@@ -5,9 +5,11 @@ import {
   ViewChild,
   OnInit,
   OnDestroy,
+  inject,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
+
 import { SearchService } from '../../services/search.service';
 import { CryptoDataManagerService } from '../../services/crypto-data-manager.service';
 
@@ -28,13 +30,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput', { static: false })
   searchInput!: ElementRef<HTMLInputElement>;
 
-  searchTerm = '';
+  private searchService = inject(SearchService);
+  private cryptoDataManager = inject(CryptoDataManagerService);
+
   private subscription = new Subscription();
 
-  constructor(
-    private searchService: SearchService,
-    private cryptoDataManager: CryptoDataManagerService
-  ) {}
+  public searchTerm = '';
 
   ngOnInit(): void {
     this.subscription.add(

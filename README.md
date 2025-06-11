@@ -9,7 +9,7 @@ A modern, responsive cryptocurrency dashboard built with Angular and Tailwind CS
 - 📈 **Mini Charts**: Sparkline charts showing 7-day price trends
 - 📱 **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - 🎨 **Modern UI**: Beautiful dark theme with smooth animations and transitions
-- ⚡ **Fast Performance**: Optimized with Angular best practices and OnPush change detection
+- ⚡ **Fast Performance**: Optimized with Angular best practices
 - ♿ **Accessibility**: Full ARIA support and keyboard navigation
 
 ## Architecture
