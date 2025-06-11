@@ -68,7 +68,12 @@ This layout keeps UI concerns separated from data concerns, maximises reusabilit
 1. **Clone the repository**
 
    ```bash
+   # Via SSH
+   git clone git@github.com:AESharak/crypto_currency_angular.git
+
+   # Via HTTPS (not recommended)
    git clone https://github.com/AESharak/crypto_currency_angular.git
+
    cd crypto_currency_angular
    ```
 
