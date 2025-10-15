@@ -13,7 +13,7 @@ Explore the live application here → [crypto-currency-angular.vercel.app](https
 - 📈 **Mini Charts**: Sparkline charts showing 7-day price trends
 - 📱 **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - 🎨 **Modern UI**: Beautiful dark theme with smooth animations and transitions
-- ⚡ **Fast Performance**: Optimized with Angular best practices
+- ⚡ **Fast Performance**: Optimized with Angular best practices and relying only on signals
 - ♿ **Accessibility**: Full ARIA support and keyboard navigation
 
 ## Architecture
@@ -50,7 +50,7 @@ This layout keeps UI concerns separated from data concerns, maximises reusabilit
 
 ## Technologies Used
 
-- **Angular 19** - Frontend framework
+- **Angular 20** - Frontend framework with zoneless configuration
 - **Tailwind CSS** - Utility-first CSS framework
 - **Chart.js** - Canvas-based charting library
 - **RxJS** - Reactive programming for data streams
