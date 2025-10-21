@@ -1,7 +1,4 @@
-<div
-  class="crypto-table-container rounded-xl overflow-hidden"
-  style="background-color: var(--card-bg); border: 1px solid var(--border-color); backdrop-filter: blur(8px);"
->
+<div class="crypto-table-container rounded-xl overflow-hidden">
   <!-- Table Header -->
   <app-table-header></app-table-header>
 
@@ -15,7 +12,7 @@
       <div
         class="absolute top-2 left-1/2 -translate-x-1/2 md:relative md:top-auto md:left-auto md:translate-x-0 flex items-center"
       >
-        <span class="text-sm font-mono md:w-8" style="color: var(--text-tertiary)">{{
+        <span class="text-tertiary text-sm font-mono md:w-8">{{
           crypto.market_cap_rank
         }}</span>
       </div>
@@ -26,10 +23,7 @@
       <!-- Price and 24h Change -->
       <div class="row-start-1 col-start-2 flex flex-col items-end md:contents">
         <!-- Price -->
-        <span
-          class="font-mono text-lg md:col-start-3 md:justify-self-end"
-          style="color: var(--text-primary)"
-        >
+        <span class="text-primary font-mono text-lg md:col-start-3 md:justify-self-end">
           {{ formatting.formatPrice(crypto.current_price) }}
         </span>
 
@@ -58,7 +52,7 @@
             "
           ></app-chart>
           } @else {
-          <div class="text-xs text-center" style="color: var(--text-tertiary)">No data</div>
+          <div class="text-tertiary text-xs text-center">No data</div>
           }
         </div>
       </div>
@@ -67,10 +61,7 @@
   </div>
 
   @if (filteredCryptos().length === 0 && !isLoading() && !error()) {
-  <div
-    class="flex flex-col items-center justify-center p-8 text-center"
-    style="color: var(--text-tertiary)"
-  >
+  <div class="flex flex-col items-center justify-center p-8 text-center text-tertiary">
     <p class="text-lg">No data available</p>
     <p class="text-sm">There are no cryptocurrencies to display.</p>
   </div>

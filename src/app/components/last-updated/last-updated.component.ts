@@ -5,7 +5,7 @@ import { FormattingService } from '../../services/formatting.service';
   selector: 'app-last-updated',
   standalone: true,
   template: `
-    <div class="text-center mt-6 text-sm" style="color: var(--text-tertiary)">
+    <div class="text-center mt-6 text-sm text-tertiary">
       Last updated: {{ formatting.formatLastUpdated(lastUpdated()!) }}
     </div>
   `,

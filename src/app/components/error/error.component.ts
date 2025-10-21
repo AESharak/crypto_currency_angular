@@ -5,7 +5,7 @@ import { Component, input } from '@angular/core';
   standalone: true,
   template: `
     <div class="error-box rounded-lg p-4 mb-6">
-      <p style="color: var(--danger-color)">{{ error() }}</p>
+      <p class="danger-color">{{ error() }}</p>
     </div>
   `,
   styles: [`

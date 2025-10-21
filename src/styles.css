@@ -76,3 +76,40 @@ body {
 .dark .bg-red-500\/10 {
   background-color: rgba(248, 113, 113, 0.1);
 }
+
+/* Utility Classes */
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-tertiary {
+  color: var(--text-tertiary);
+}
+
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--bg-tertiary);
+}
+
+.bg-card {
+  background-color: var(--card-bg);
+}
+
+.border-themed {
+  border-color: var(--border-color);
+}
+
+.danger-color {
+  color: var(--danger-color);
+}

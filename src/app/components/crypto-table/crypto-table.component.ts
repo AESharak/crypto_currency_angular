@@ -11,6 +11,12 @@ import { CryptoNameLogoComponent } from '../crypto-name-logo/crypto-name-logo.co
   imports: [ChartComponent, TableHeaderComponent, CryptoNameLogoComponent],
   templateUrl: './crypto-table.component.html',
   styles: [`
+    .crypto-table-container {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(8px);
+    }
+    
     .crypto-table-body {
       border-top: 1px solid var(--border-color);
     }

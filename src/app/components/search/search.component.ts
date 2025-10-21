@@ -34,6 +34,11 @@ import { CryptoDataManagerService } from '../../services/crypto-data-manager.ser
       .search-input:focus {
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
       }
+      
+      .search-shortcut {
+        color: var(--text-tertiary);
+        background-color: var(--bg-tertiary);
+      }
     `,
   ],
 })

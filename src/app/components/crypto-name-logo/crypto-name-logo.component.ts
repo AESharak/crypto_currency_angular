@@ -14,8 +14,8 @@ import { Cryptocurrency } from '../../models/cryptocurrency.model';
       loading="lazy"
     />
     <div>
-      <div class="font-medium" style="color: var(--text-primary)">{{ crypto().name }}</div>
-      <div class="text-sm uppercase" style="color: var(--text-tertiary)">
+      <div class="font-medium text-primary">{{ crypto().name }}</div>
+      <div class="text-sm uppercase text-tertiary">
         {{ crypto().symbol }}
       </div>
     </div>
