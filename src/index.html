@@ -10,6 +10,16 @@
       content="Real-time cryptocurrency dashboard with live prices, charts, and market data"
     />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script>
+      // Prevent flash of light theme on page load
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const isDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <app-root></app-root>
