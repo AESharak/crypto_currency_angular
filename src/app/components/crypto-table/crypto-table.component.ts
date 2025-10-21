@@ -10,6 +10,23 @@ import { CryptoNameLogoComponent } from '../crypto-name-logo/crypto-name-logo.co
   standalone: true,
   imports: [ChartComponent, TableHeaderComponent, CryptoNameLogoComponent],
   templateUrl: './crypto-table.component.html',
+  styles: [`
+    .crypto-table-body {
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .crypto-row {
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .crypto-row:hover {
+      background-color: var(--table-row-hover);
+    }
+    
+    .crypto-row:last-child {
+      border-bottom: none;
+    }
+  `]
 })
 export class CryptoTableComponent {
   public filteredCryptos = input<Cryptocurrency[]>([]);

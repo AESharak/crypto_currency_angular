@@ -5,10 +5,10 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <div class="mb-8">
-      <h1 class="text-2xl md:text-4xl font-bold text-white mb-2">
+      <h1 class="text-2xl md:text-4xl font-bold mb-2" style="color: var(--text-primary)">
         Cryptocurrency Dashboard
       </h1>
-      <p class="text-gray-400">
+      <p style="color: var(--text-secondary)">
         Real-time cryptocurrency prices and market data
       </p>
     </div>

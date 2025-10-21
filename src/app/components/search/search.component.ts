@@ -21,7 +21,17 @@ import { CryptoDataManagerService } from '../../services/crypto-data-manager.ser
   templateUrl: './search.component.html',
   styles: [
     `
-      input:focus {
+      .search-input {
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+      }
+      
+      .search-input::placeholder {
+        color: var(--text-tertiary);
+      }
+      
+      .search-input:focus {
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
       }
     `,

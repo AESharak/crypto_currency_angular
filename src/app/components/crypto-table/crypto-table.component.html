@@ -1,20 +1,21 @@
 <div
-  class="bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700"
+  class="crypto-table-container rounded-xl overflow-hidden"
+  style="background-color: var(--card-bg); border: 1px solid var(--border-color); backdrop-filter: blur(8px);"
 >
   <!-- Table Header -->
   <app-table-header></app-table-header>
 
   <!-- Table Body -->
-  <div class="divide-y divide-slate-700">
+  <div class="crypto-table-body">
     @for (crypto of filteredCryptos(); track crypto.id) {
     <div
-      class="relative grid grid-cols-[1fr_auto] grid-rows-2 md:grid-rows-1 md:grid-cols-5 p-4 gap-x-4 gap-y-2 items-center hover:bg-slate-700/30 transition-colors duration-200"
+      class="crypto-row relative grid grid-cols-[1fr_auto] grid-rows-2 md:grid-rows-1 md:grid-cols-5 p-4 gap-x-4 gap-y-2 items-center transition-colors duration-200"
     >
       <!-- Rank -->
       <div
         class="absolute top-2 left-1/2 -translate-x-1/2 md:relative md:top-auto md:left-auto md:translate-x-0 flex items-center"
       >
-        <span class="text-gray-400 text-sm font-mono md:w-8">{{
+        <span class="text-sm font-mono md:w-8" style="color: var(--text-tertiary)">{{
           crypto.market_cap_rank
         }}</span>
       </div>
@@ -26,7 +27,8 @@
       <div class="row-start-1 col-start-2 flex flex-col items-end md:contents">
         <!-- Price -->
         <span
-          class="text-white font-mono text-lg md:col-start-3 md:justify-self-end"
+          class="font-mono text-lg md:col-start-3 md:justify-self-end"
+          style="color: var(--text-primary)"
         >
           {{ formatting.formatPrice(crypto.current_price) }}
         </span>
@@ -56,7 +58,7 @@
             "
           ></app-chart>
           } @else {
-          <div class="text-gray-500 text-xs text-center">No data</div>
+          <div class="text-xs text-center" style="color: var(--text-tertiary)">No data</div>
           }
         </div>
       </div>
@@ -66,7 +68,8 @@
 
   @if (filteredCryptos().length === 0 && !isLoading() && !error()) {
   <div
-    class="flex flex-col items-center justify-center p-8 text-center text-gray-500"
+    class="flex flex-col items-center justify-center p-8 text-center"
+    style="color: var(--text-tertiary)"
   >
     <p class="text-lg">No data available</p>
     <p class="text-sm">There are no cryptocurrencies to display.</p>

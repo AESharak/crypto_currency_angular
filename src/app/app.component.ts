@@ -9,6 +9,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ErrorComponent } from './components/error/error.component';
 import { CryptoTableComponent } from './components/crypto-table/crypto-table.component';
 import { LastUpdatedComponent } from './components/last-updated/last-updated.component';
+import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ import { LastUpdatedComponent } from './components/last-updated/last-updated.com
     ErrorComponent,
     CryptoTableComponent,
     LastUpdatedComponent,
+    ThemeToggleComponent,
   ],
   templateUrl: './app.component.html',
 })

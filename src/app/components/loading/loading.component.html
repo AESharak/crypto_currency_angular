@@ -1,54 +1,55 @@
 <div
-  class="bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700"
+  class="rounded-xl overflow-hidden"
+  style="background-color: var(--card-bg); border: 1px solid var(--border-color); backdrop-filter: blur(8px);"
 >
   <!-- Table Header -->
   <app-table-header></app-table-header>
 
   <!-- Skeleton Body -->
-  <div class="divide-y divide-slate-700">
+  <div class="skeleton-body">
     @for (item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track item) {
     <div
-      class="grid grid-cols-[1fr_auto] grid-rows-2 md:grid-rows-1 md:grid-cols-5 p-4 gap-x-4 gap-y-2 items-center animate-pulse"
+      class="skeleton-row grid grid-cols-[1fr_auto] grid-rows-2 md:grid-rows-1 md:grid-cols-5 p-4 gap-x-4 gap-y-2 items-center animate-pulse"
     >
       <!-- Rank (Desktop only) -->
       <div class="hidden md:flex items-center">
-        <div class="bg-slate-700 h-5 rounded w-8"></div>
+        <div class="skeleton-box h-5 rounded w-8"></div>
       </div>
 
       <!-- Name and Logo -->
       <div
         class="row-start-1 col-start-1 flex items-center space-x-3 md:col-start-2"
       >
-        <div class="w-8 h-8 rounded-full bg-slate-700 shrink-0"></div>
+        <div class="w-8 h-8 rounded-full skeleton-box shrink-0"></div>
         <div class="w-full space-y-2">
-          <div class="h-4 bg-slate-700 rounded w-3/4"></div>
-          <div class="h-3 bg-slate-700 rounded w-1/2"></div>
+          <div class="h-4 skeleton-box rounded w-3/4"></div>
+          <div class="h-3 skeleton-box rounded w-1/2"></div>
         </div>
       </div>
 
       <!-- Price (Desktop) -->
       <div class="hidden md:flex items-center justify-end">
-        <div class="h-6 bg-slate-700 rounded w-28"></div>
+        <div class="h-6 skeleton-box rounded w-28"></div>
       </div>
 
       <!-- 24h Change (Desktop) -->
       <div class="hidden md:flex items-center justify-end">
-        <div class="h-6 bg-slate-700 rounded w-20"></div>
+        <div class="h-6 skeleton-box rounded w-20"></div>
       </div>
 
       <!-- Price and Change (Mobile) -->
       <div
         class="row-start-1 col-start-2 flex flex-col items-end space-y-2 md:hidden"
       >
-        <div class="h-6 bg-slate-700 rounded w-28"></div>
-        <div class="h-4 bg-slate-700 rounded w-20"></div>
+        <div class="h-6 skeleton-box rounded w-28"></div>
+        <div class="h-4 skeleton-box rounded w-20"></div>
       </div>
 
       <!-- Mini Chart -->
       <div
         class="col-span-2 row-start-2 md:row-start-1 md:col-start-5 flex items-center justify-center"
       >
-        <div class="w-full h-24 md:w-20 md:h-12 bg-slate-700 rounded"></div>
+        <div class="w-full h-24 md:w-20 md:h-12 skeleton-box rounded"></div>
       </div>
     </div>
     }
@@ -56,5 +57,5 @@
 </div>
 
 <div class="text-center mt-6">
-  <div class="h-4 bg-slate-700 rounded w-48 inline-block animate-pulse"></div>
+  <div class="h-4 skeleton-box rounded w-48 inline-block animate-pulse"></div>
 </div>

@@ -5,7 +5,8 @@ import { Component, signal } from '@angular/core';
   imports: [],
   template: `
     <div
-      class="hidden md:grid md:grid-cols-5 gap-4 p-4 bg-slate-700/50 text-gray-300 text-sm font-medium"
+      class="hidden md:grid md:grid-cols-5 gap-4 p-4 text-sm font-medium"
+      style="background-color: var(--table-header-bg); color: var(--text-secondary);"
     >
       @for (element of headerElements(); track element) {
       <div class="flex items-center" [class]="element.additionalClasses">
